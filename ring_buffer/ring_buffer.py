@@ -1,9 +1,17 @@
 class RingBuffer:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.buffer = []
+        self.current = 0
 
     def append(self, item):
-        pass
+        if len(self.buffer) < self.capacity:
+            self.buffer.append(item)
+        elif len(self.buffer) == self.capacity:
+            self.buffer[self.current] = item
+            self.current = (self.current + 1) % self.capacity
 
     def get(self):
-        pass
+        if self.buffer is not None:
+            return self.buffer[:self.current]+self.buffer[self.current:]
+        #so this code will push for some reason it didn't
